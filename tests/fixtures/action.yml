@@ -1,8 +1,8 @@
-name: Example composite
-description: Exercise called and standalone composite analysis
+name: Composite action fixture
+description: Test analysis of called and standalone composite actions
 runs:
   using: composite
   steps:
-    - name: Composite Bash
+    - name: Run Bash in the composite action
       shell: bash
       run: echo $HOME

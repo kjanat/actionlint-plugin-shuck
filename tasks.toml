@@ -1,22 +1,22 @@
 ["build"]
-description = "Build the Shuck WebAssembly component"
+description = "Compile the Shuck plugin to WebAssembly"
 sources = ["src/**/*.rs", "Cargo.*", "vendor/actionlint-extension-api/**"]
 outputs = ["target/wasm32-wasip2/release/actionlint_plugin_shuck.wasm"]
 run = "cargo build --locked -j 1 --release --lib --target wasm32-wasip2"
 
 ["package"]
-description = "Package the component with metadata, schema and checksums"
+description = "Create the plugin package, metadata, schema and checksums"
 depends = ["build"]
 sources = ["src/**/*.rs", "Cargo.*", "LICENSE", "target/wasm32-wasip2/release/actionlint_plugin_shuck.wasm"]
 outputs = ["artifacts/*"]
 run = "cargo run --locked -j 1 --features package --bin package -- target/wasm32-wasip2/release/actionlint_plugin_shuck.wasm artifacts"
 
 ["test"]
-description = "Test Shuck analysis, source mapping and fixes"
+description = "Run the Rust tests for analysis, source mapping and fixes"
 run = "cargo test --locked -j 1 --lib"
 
 ["test:host"]
-description = "Test the component through the ACTIONLINT executable"
+description = "Run integration tests with the ACTIONLINT executable"
 depends = ["package"]
 run = "bun run test"
 

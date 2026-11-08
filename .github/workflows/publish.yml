@@ -1,4 +1,4 @@
-name: Publish Shuck plugin
+name: Submit the Shuck plugin to the registry
 
 on:
   push:
@@ -17,7 +17,7 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - name: Wait for the immutable release
+      - name: Wait until the release is published and immutable
         shell: bash -euo pipefail {0}
         env:
           GH_TOKEN: ${{ github.token }}
