@@ -30,7 +30,7 @@ jobs:
           jq -e '.immutable == true and .draft == false' release.json
           digest="$(jq -er '.assets[] | select(.name == "plugin.wasm") | .digest' release.json)"
           printf 'PLUGIN_SHA256=%s\n' "${digest#sha256:}" >> "$GITHUB_ENV"
-      - uses: kjanat/actionlint-registry@0088741b3bbd0eab844207e63d70b2373c0455e6 # master
+      - uses: kjanat/actionlint-registry@b9bcb5326008beded3a45ab7af104b1573321df4 # master
         with:
           asset: plugin.wasm
           sha256: ${{ env.PLUGIN_SHA256 }}
