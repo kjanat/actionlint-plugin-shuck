@@ -25,6 +25,7 @@ const executable = process.env.ACTIONLINT;
 if (!executable) throw new Error('Set ACTIONLINT to the actionlint v2 executable to test.');
 const actionlint = resolve(executable);
 const component = resolve('artifacts/plugin.wasm');
+const plugin = process.env.ACTIONLINT_PLUGIN;
 let directory: string;
 
 beforeAll(async () => {
@@ -44,18 +45,26 @@ afterAll(async () => {
 });
 
 async function check(path = 'workflow.yml', config = 'actionlint.yaml') {
+	const env = { ...process.env, XDG_CACHE_HOME: join(directory, 'cache'), LOCALAPPDATA: join(directory, 'cache') };
+	if (plugin) {
+		const installation = Bun.spawnSync([actionlint, 'plugin', 'install', plugin, '--config', config], {
+			cwd: directory,
+			env,
+		});
+		expect(installation.exitCode, installation.stderr.toString()).toBe(0);
+		expect(await readFile(join(directory, config), 'utf8')).toContain('github.com/kjanat/actionlint-plugin-shuck@');
+	}
 	const child = Bun.spawn([
 		actionlint,
 		'check',
-		'--plugin',
-		component,
+		...(plugin ? [] : ['--plugin', component]),
 		'--config',
 		config,
 		'--no-tool=shellcheck',
 		'--no-tool=ruff',
 		'--json',
 		path,
-	], { cwd: directory, stdout: 'pipe', stderr: 'pipe' });
+	], { cwd: directory, env, stdout: 'pipe', stderr: 'pipe' });
 	const [stdout, stderr, status] = await Promise.all([
 		new Response(child.stdout).text(),
 		new Response(child.stderr).text(),
