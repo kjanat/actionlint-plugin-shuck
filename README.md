@@ -50,7 +50,7 @@ The workflow interpreter selects Bash, POSIX shell, dash, mksh or Zsh. Custom
 commands are recognized by executable name, including paths and quoted names.
 Unknown interpreters and non-shell languages are skipped. Generic `ksh` is
 skipped because its name does not identify a dialect. The optional `dialect`
-setting accepts `bash`, `posix`, `mksh` or `zsh`; it changes the dialect of
+setting accepts `bash`, `posix`, `mksh` or `zsh`. It changes the dialect of
 recognized shell scripts. It does not turn Python or PowerShell steps into shell
 scripts. A shebang in `run:` does not override the workflow's interpreter.
 
