@@ -1,0 +1,37 @@
+name: Publish Shuck plugin
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  submit:
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Wait for the immutable release
+        shell: bash -euo pipefail {0}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          for attempt in {1..60}; do
+            if gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${TAG}" > release.json && jq -e '.immutable == true and .draft == false' release.json; then break; fi
+            sleep 5
+          done
+          jq -e '.immutable == true and .draft == false' release.json
+          digest="$(jq -er '.assets[] | select(.name == "plugin.wasm") | .digest' release.json)"
+          printf 'PLUGIN_SHA256=%s\n' "${digest#sha256:}" >> "$GITHUB_ENV"
+      - uses: kjanat/actionlint-registry@0088741b3bbd0eab844207e63d70b2373c0455e6 # master
+        with:
+          asset: plugin.wasm
+          sha256: ${{ env.PLUGIN_SHA256 }}
+          kind: component

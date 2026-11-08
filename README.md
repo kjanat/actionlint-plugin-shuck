@@ -11,8 +11,8 @@ fixes mapped to the original YAML. Called composite actions are checked too.
 ## Use
 
 ```sh
-mise exec -- mise run package
-actionlint check --experimental --plugin ./artifacts/plugin.wasm .github
+actionlint plugin install shuck
+actionlint check --experimental .github
 ```
 
 Use an actionlint v2 build that supplies
