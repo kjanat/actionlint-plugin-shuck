@@ -1,0 +1,31 @@
+{
+  "repository": "https://github.com/kjanat/actionlint",
+  "base_commit": "7fb70dc5fe6d572caf21d233edddc4a07f500d9c",
+  "uncommitted_sdk_changes": true,
+  "directory": "plugins/sdk/rust",
+  "files": {
+    "build.rs": "6b367068d01cc9c49b6a77bbb1ddc0203a7b83b1be9f6fa112233dd7e60f3614",
+    "json/shell-preparation-0.3.0.md": "05d297ebcddc5cdc4808a84fb9d80796f48899ccce7463b731ef0f3338bba9a4",
+    "src/lib.rs": "02b35427aca8002ebcf433129ced4fd3edc0aa9325d50b2727f194000944b472",
+    "wit/tool-integration.wit": "08fd146bce1b1fcebccf01d2de1a785776bda122c8245befe21d0d901f8de9ea",
+    "wit/script-engine.wit": "c20d7e9e516166576fdf19bfd86e0843838179b12ad55350c33db8d04c2eaa9b",
+    "wit/environment-worlds.wit": "3f875aa49b2c9bdfd5f49300dac33bca8889a3eeae790a5715c370f6a7775d22",
+    "src/package.rs": "abc9513d321d85d7f0a1d44db3156741e460347983ed10e5c98feb005cbbd25c",
+    "json/shell-preparation-0.1.0.md": "f28e6a10123e088dcd71d483465f88f989a8f3c4db7990240bb82020c0d8d3b2",
+    "json/shell-preparation-0.2.0.md": "371dae0697f74e6b4447e3caa54d6b61ca0d8d88fcebb45d4049985033fed3a6",
+    "wit/source-annotations.wit": "d52556e695537a59b7e50fea4a3c6686fc95e2eae31dbe33f43648f4ce1d0269",
+    "wit/deps/actionlint-script/environments.wit": "6a92a7bb8b44ffba4543877c4afc14da9a5f1bfbbba657db7ac91a026d90ad98",
+    "wit/core-json-abi.md": "e92aeb79fefa8fdff0c4c19a4b3b218f22665d556387fd89049cdef11fc00aa8",
+    "wit/template-effects.wit": "90722c112a92ba8e098609c2bf11170892504477d5526f62ae7f3a4cdf270fba",
+    "wit/deps/actionlint-script/shell-script-inputs.wit": "9e96e3d53855d2bd8fc5304fb0272dbc2e0b18c88a5f4c1163b8c1d7e011aef9",
+    "wit/deps/actionlint-0.3.0/script-engine.wit": "6c289637bd345bd66db965fe9084fb8e5a4f03b0d5655497025e2d1a05c36479",
+    "wit/deps/actionlint-0.3.0/template-effects.wit": "29c7fbd8a5779e38d1d542d1cc4ba90b0c264ef7bc6b35f8bcefc778a075c789",
+    "wit/analyzer.wit": "287f569cb6587a23f2195f9d8398f370c32a2b21deed1fac42f3b56fd03c7c23",
+    "README.md": "808d51db40967544aafd164825cc8e603384494ec21fa85369df0ae8d6a371a9",
+    "wit/runner.wit": "2a995ebe267d4d5df5664c0f6f48b40cc770116ef9375935f26f3a648652df9f",
+    "wit/source-files.wit": "97d9db90ea2822ca521c30a1a4d97b932b49ba5af18410c5a9f4975c7f06d2dd",
+    "LICENSE.txt": "30c27f95f985ec0d4430bc4e26e6b10558d4f326749097974fa5f8b4fe639435",
+    "Cargo.toml": "ec5a53b61f4f249debea607c65ade6384771b8fca58b8a0d6f28f38b4bed5cff"
+  },
+  "text_normalization": "LF line endings; trailing whitespace removed"
+}
