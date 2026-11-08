@@ -1,0 +1,7 @@
+lint:
+  rules:
+    correctness:
+      shuck:
+        level: warn
+        options:
+          select: [S001, C006]

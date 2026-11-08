@@ -1,0 +1,49 @@
+name: Shuck integration
+on: push
+permissions: {}
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Bash Unicode
+        shell: bash
+        run: |
+          echo 😀; echo $HOME
+      - name: Quoted Bash
+        shell: bash
+        run: echo "$HOME"
+      - name: POSIX
+        shell: sh
+        run: echo $HOME
+      - name: Zsh
+        shell: zsh -f {0}
+        run: echo $HOME
+      - name: Mksh
+        shell: mksh {0}
+        run: echo $HOME
+      - name: Python
+        shell: python
+        run: print('hello')
+      - name: PowerShell
+        shell: pwsh
+        run: Write-Output $env:HOME
+      - name: Native directive
+        shell: bash
+        run: |
+          # shuck: disable=S001
+          echo $HOME
+      - name: YAML directive
+        shell: bash
+        # shuck: disable=S001
+        run: echo $HOME
+      - name: Host suppression
+        shell: bash
+        # actionlint-ignore-next-line shuck
+        run: echo $HOME
+      - name: Environment names
+        shell: bash
+        env:
+          declared_name: present
+        run: echo "$declared_name"
+      - name: Composite call
+        uses: ./.github/actions/example

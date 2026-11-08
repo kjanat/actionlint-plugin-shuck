@@ -1,0 +1,39 @@
+[package]
+name = "actionlint-plugin-shuck"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.99"
+description = "Shuck shell analysis as an actionlint WebAssembly plugin"
+repository = "https://github.com/kjanat/actionlint-plugin-shuck"
+license = "MIT"
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[[bin]]
+name = "package"
+path = "src/bin/package.rs"
+required-features = ["package"]
+
+[dependencies]
+actionlint-extension-api = { path = "vendor/actionlint-extension-api", features = ["script-environments", "shell-script-inputs"] }
+schemars = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+shell-words = "1.1.1"
+shuck-linter = "=0.2.8"
+shuck-parser = "=0.2.8"
+
+[features]
+package = ["actionlint-extension-api/package"]
+
+[profile.dev]
+debug = 0
+
+[profile.release]
+opt-level = "s"
+strip = "debuginfo"
+lto = false
+panic = "abort"
+codegen-units = 1

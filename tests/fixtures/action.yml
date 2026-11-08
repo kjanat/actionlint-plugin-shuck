@@ -1,0 +1,8 @@
+name: Example composite
+description: Exercise called and standalone composite analysis
+runs:
+  using: composite
+  steps:
+    - name: Composite Bash
+      shell: bash
+      run: echo $HOME
