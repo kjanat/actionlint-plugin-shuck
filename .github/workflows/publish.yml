@@ -1,4 +1,4 @@
-name: Publish Shuck plugin
+name: Submit the Shuck plugin to the registry
 on:
   push: { tags: ["v*"] }
   workflow_dispatch: null
@@ -11,7 +11,7 @@ jobs:
     timeout-minutes: 10
     permissions: { contents: read, id-token: write }
     steps:
-      - name: Wait for the immutable release
+      - name: Wait until the release is published and immutable
         env: { GH_TOKEN: "${{ github.token }}", tag: "${{ github.ref_name }}" }
         id: publication
         run: |

@@ -1,15 +1,15 @@
-name: Shuck integration
+name: Shuck integration fixture
 on: push
 permissions: {}
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - name: Bash Unicode
+      - name: Run Bash with Unicode
         shell: bash
         run: |
           echo 😀; echo $HOME
-      - name: Quoted Bash
+      - name: Run Bash with a quoted variable
         shell: bash
         run: echo "$HOME"
       - name: POSIX
@@ -27,23 +27,23 @@ jobs:
       - name: PowerShell
         shell: pwsh
         run: Write-Output $env:HOME
-      - name: Native directive
+      - name: Suppress a rule inside the script
         shell: bash
         run: |
           # shuck: disable=S001
           echo $HOME
-      - name: YAML directive
+      - name: Suppress a rule in a YAML comment
         shell: bash
         # shuck: disable=S001
         run: echo $HOME
-      - name: Host suppression
+      - name: Suppress the plugin through actionlint
         shell: bash
         # actionlint-ignore-next-line shuck
         run: echo $HOME
-      - name: Environment names
+      - name: Declare an environment variable
         shell: bash
         env:
           declared_name: present
         run: echo "$declared_name"
-      - name: Composite call
+      - name: Call the composite action
         uses: ./.github/actions/example

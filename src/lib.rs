@@ -59,14 +59,14 @@ impl Guest for Plugin {
 pub fn descriptor() -> Descriptor {
     Descriptor {
         name: "shuck".into(),
-        description: "Check shell scripts with Shuck".into(),
+        description: "Run Shuck on shell scripts".into(),
         category: "correctness".into(),
         subcategory: "shell".into(),
         maturity: "nursery".into(),
         provider: "kjanat/actionlint-plugin-shuck".into(),
         recommended: true,
-        explanation: "Checks Bash, POSIX shell, mksh and Zsh scripts with Shuck.".into(),
-        help: "Use select, ignore and dialect under lint.rules.correctness.shuck.options.".into(),
+        explanation: "Shuck analyzes Bash, POSIX shell, mksh and Zsh scripts.".into(),
+        help: "Set select, ignore and dialect in lint.rules.correctness.shuck.options.".into(),
         documentation_url: env!("CARGO_PKG_REPOSITORY").into(),
         fix_availability: String::new(),
         options_schema: options::schema(),
@@ -102,7 +102,7 @@ fn analyze_script(script: &Script, options: &Options) -> Result<Vec<Diagnostic>,
     let occurrence = script
         .occurrence
         .as_deref()
-        .ok_or("script occurrence missing")?;
+        .ok_or("script occurrence is missing")?;
     let Some(mut prepared) = shell_script_inputs::for_script(occurrence, None)? else {
         return Ok(Vec::new());
     };

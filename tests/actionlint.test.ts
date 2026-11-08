@@ -22,7 +22,7 @@ const resultSchema = z.object({
 });
 
 const executable = process.env.ACTIONLINT;
-if (!executable) throw new Error('Set ACTIONLINT to the actionlint v2 executable to test.');
+if (!executable) throw new Error('Set ACTIONLINT to the path of an actionlint v2 executable before running the tests.');
 const actionlint = resolve(executable);
 const component = resolve('artifacts/plugin.wasm');
 const plugin = process.env.ACTIONLINT_PLUGIN;
@@ -74,7 +74,7 @@ async function check(path = 'workflow.yml', config = 'actionlint.yaml') {
 	return resultSchema.parse(JSON.parse(stdout));
 }
 
-test('real Wasm analysis maps Bash, POSIX, mksh and invoked composite findings', async () => {
+test('maps Bash, POSIX, mksh and called composite findings through the WebAssembly component', async () => {
 	const result = await check();
 	const findings = result.diagnostics.filter(diagnostic => diagnostic.rule === 'shuck');
 	expect(
@@ -90,13 +90,13 @@ test('real Wasm analysis maps Bash, POSIX, mksh and invoked composite findings',
 	expect(findings[0]?.path.replaceAll('\\', '/')).toEndWith('.github/actions/example/action.yml');
 });
 
-test('standalone composite actions use the same plugin', async () => {
+test('checks standalone composite actions with the plugin', async () => {
 	const result = await check('.github/actions/example/action.yml');
 	expect(result.diagnostics.filter(diagnostic => diagnostic.rule === 'shuck').map(diagnostic => diagnostic.code))
 		.toEqual(['S001']);
 });
 
-test('configuration can disable Shuck and change its level', async () => {
+test('uses configuration to disable Shuck or set its severity', async () => {
 	await writeFile(join(directory, 'off.yaml'), 'lint:\n  rules:\n    correctness:\n      shuck: off\n');
 	expect((await check('workflow.yml', 'off.yaml')).diagnostics.filter(diagnostic => diagnostic.rule === 'shuck'))
 		.toEqual([]);
@@ -111,17 +111,17 @@ test('configuration can disable Shuck and change its level', async () => {
 	expect(findings.every(diagnostic => diagnostic.severity === 'info')).toBe(true);
 });
 
-test('applying component edits removes the finding and produces valid YAML', async () => {
+test('removes the finding and keeps YAML valid after applying a fix', async () => {
 	const result = await check();
 	const finding = result.diagnostics.find(diagnostic => diagnostic.rule === 'shuck' && diagnostic.start.line === 11);
 	expect(finding?.fixes).toHaveLength(1);
 	const fix = finding?.fixes?.[0];
-	if (!fix) throw new Error('Expected a Shuck fix for the block scalar');
+	if (!fix) throw new Error('Shuck did not offer a fix for the block scalar');
 	const lines = (await readFile(join(directory, 'workflow.yml'), 'utf8')).split('\n');
 	for (const edit of [...fix.edits].sort((a, b) => b.start.line - a.start.line || b.start.column - a.start.column)) {
 		expect(edit.start.line).toBe(edit.end.line);
 		const line = lines[edit.start.line - 1];
-		if (line === undefined) throw new Error('Edit points outside the workflow');
+		if (line === undefined) throw new Error('The edit points outside the workflow');
 		const points = Array.from(line);
 		lines[edit.start.line - 1] = [
 			...points.slice(0, edit.start.column - 1),
@@ -135,7 +135,7 @@ test('applying component edits removes the finding and produces valid YAML', asy
 	expect(fixed.diagnostics.some(diagnostic => diagnostic.rule === 'shuck' && diagnostic.start.line === 11)).toBe(false);
 });
 
-test('quoted YAML maps escaped characters without offering an unsafe YAML rewrite', async () => {
+test('maps escaped characters in quoted YAML without offering a fix', async () => {
 	const line = '        run: "echo \\U0001F600; echo $HOME"';
 	await writeFile(
 		join(directory, 'quoted.yml'),
@@ -149,7 +149,7 @@ test('quoted YAML maps escaped characters without offering an unsafe YAML rewrit
 	expect(findings[0]?.fixes ?? []).toEqual([]);
 });
 
-test('unterminated shell text produces a parser diagnostic', async () => {
+test('reports a parser diagnostic for an unclosed shell string', async () => {
 	await writeFile(
 		join(directory, 'broken.yml'),
 		'on: push\njobs:\n  check:\n    runs-on: ubuntu-latest\n    steps:\n      - shell: bash\n        run: |\n          echo "unterminated\n',
