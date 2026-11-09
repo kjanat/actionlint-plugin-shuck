@@ -23,7 +23,7 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 shell-words = "1.1.1"
 shuck-linter = "=0.2.8"
-shuck-parser = "=0.2.8"
+shuck-parser = "=0.2.9"
 
 [features]
 package = ["actionlint-extension-api/package"]
