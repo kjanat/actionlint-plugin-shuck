@@ -24,10 +24,8 @@ to run Shuck without ShellCheck.
 `--experimental` enables this nursery rule. An explicit rule setting, as shown
 below, also enables it.
 
-This repository tests the current v2 development host. The SDK is included in
-[`vendor/actionlint-extension-api`](vendor/actionlint-extension-api).
-[`vendor/sdk-snapshot.json`](vendor/sdk-snapshot.json) records its source commit,
-local changes and file hashes.
+This repository tests the current v2 development host. Cargo fetches the SDK from the
+actionlint Git revision pinned in `Cargo.toml` and `Cargo.lock`.
 
 ## Configure
 
