@@ -26,11 +26,11 @@ impl Dialect {
 #[derive(Default, Deserialize, JsonSchema)]
 #[serde(default, deny_unknown_fields)]
 pub struct Options {
-    /// Override the workflow interpreter's dialect.
+    /// Select a dialect for recognized workflow shell scripts.
     pub dialect: Option<Dialect>,
-    /// Shuck rule codes, prefixes, categories or named groups to enable. Omission uses Shuck's defaults.
+    /// Choose Shuck rule codes, prefixes, categories or named groups. Omit this option to use Shuck's defaults.
     pub select: Option<Vec<String>>,
-    /// Shuck rule selectors to disable.
+    /// Disable rules that match these Shuck selectors.
     pub ignore: Vec<String>,
 }
 impl Options {
@@ -69,5 +69,6 @@ impl Options {
     }
 }
 pub fn schema() -> String {
-    serde_json::to_string(&schemars::schema_for!(Options)).expect("options schema is JSON")
+    serde_json::to_string(&schemars::schema_for!(Options))
+        .expect("the options schema should serialize to JSON")
 }
