@@ -17,7 +17,7 @@ path = "src/bin/package.rs"
 required-features = ["package"]
 
 [dependencies]
-actionlint-extension-api = { path = "vendor/actionlint-extension-api", features = ["script-environments", "shell-script-inputs"] }
+actionlint-extension-api = { git = "https://github.com/kjanat/actionlint", rev = "ab420b66fb98af9d993c176e97506ecec9d3a396", features = ["script-environments", "shell-script-inputs"] }
 schemars = "1"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"

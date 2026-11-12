@@ -1,6 +1,6 @@
 ["build"]
 description = "Compile the Shuck plugin to WebAssembly"
-sources = ["src/**/*.rs", "Cargo.*", "vendor/actionlint-extension-api/**"]
+sources = ["src/**/*.rs", "Cargo.*"]
 outputs = ["target/wasm32-wasip2/release/actionlint_plugin_shuck.wasm"]
 run = "cargo build --locked -j 1 --release --lib --target wasm32-wasip2"
 
