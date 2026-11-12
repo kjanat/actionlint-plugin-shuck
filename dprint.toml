@@ -1,7 +1,6 @@
 #:schema https://dprint.kjanat.dev/schemas/v0.json
 
 extends = ["https://raw.githubusercontent.com/kjanat/kjanat/refs/heads/master/configs/dprint.remote.json"]
-excludes = ["vendor/"]
 
 [exec]
 cwd = "${configDir}"
