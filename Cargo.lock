@@ -448,18 +448,18 @@ checksum = "dc6fe69c597f9c37bfeeeeeb33da3530379845f10be461a66d16d03eca2ded77"
 
 [[package]]
 name = "shuck-ast"
-version = "0.2.8"
+version = "0.2.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "059d212c71c1470c7bc2a4a41e131aa308f8b70e4785fc96a4257dc21139ce5e"
+checksum = "6735798bc7e70e23e9c79a66b79b8ef81a12b491abe08f5b50a09f013753dd9b"
 dependencies = [
  "compact_str",
 ]
 
 [[package]]
 name = "shuck-indexer"
-version = "0.2.8"
+version = "0.2.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f3f728c4d0895ae87a0dfc6181030be84df252e70619d9d289bd6a6f90507b9c"
+checksum = "4c312ae5b625a25f83b2c7ec704af3e451d02ea652c2ad0d40363298cb93d1cc"
 dependencies = [
  "shuck-ast",
  "shuck-parser",
@@ -467,9 +467,9 @@ dependencies = [
 
 [[package]]
 name = "shuck-linter"
-version = "0.2.8"
+version = "0.2.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "500d5dad1d4fe8a3df44479e9c857b383c4912552373f0f443369e54de307f8b"
+checksum = "b1ce0d5b4d347fed3e3d4a07baf6039b1d00960e44de1dc8a3332b937507a635"
 dependencies = [
  "anyhow",
  "compact_str",
@@ -487,9 +487,9 @@ dependencies = [
 
 [[package]]
 name = "shuck-parser"
-version = "0.2.8"
+version = "0.2.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8f253687302e693df733ddda9fa576b6c2443c54c7fcfd26fdf3fa7cd11c0b37"
+checksum = "c0206e66d9fa63fe1e79db66d375fe3c0a39f15b4fe9fdb10e991c6c48ce74a1"
 dependencies = [
  "memchr",
  "shuck-ast",
@@ -498,9 +498,9 @@ dependencies = [
 
 [[package]]
 name = "shuck-semantic"
-version = "0.2.8"
+version = "0.2.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0750da7d3d9aedd5b43f46879d1339be62923fa0803a02439152a621aa3253b8"
+checksum = "684edecd2cf1f83c126e4885d42b108e51f17af9bdf5a110a5861c3949bb1a3d"
 dependencies = [
  "bitflags",
  "compact_str",
