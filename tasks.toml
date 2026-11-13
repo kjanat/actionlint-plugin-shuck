@@ -13,7 +13,7 @@ run = "cargo run --locked -j 1 --features package --bin package -- target/wasm32
 
 ["test"]
 description = "Run the Rust tests for analysis, source mapping and fixes"
-run = "cargo test --locked -j 1 --lib"
+run = "cargo test --locked -j 1 --all-targets --features package"
 
 ["test:host"]
 description = "Run integration tests with the ACTIONLINT executable"

@@ -1,6 +1,6 @@
 [package]
 name = "actionlint-plugin-shuck"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2024"
 rust-version = "1.99"
 description = "Run Shuck shell checks through an actionlint WebAssembly plugin"
@@ -24,9 +24,10 @@ serde_json = "1"
 shell-words = "1.1.1"
 shuck-linter = "=0.2.9"
 shuck-parser = "=0.2.9"
+toml = { version = "1", optional = true, default-features = false, features = ["parse", "serde"] }
 
 [features]
-package = ["actionlint-extension-api/package"]
+package = ["actionlint-extension-api/package", "dep:toml"]
 
 [profile.dev]
 debug = 0
