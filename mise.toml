@@ -1,7 +1,7 @@
 [tools]
 "github:kjanat/kprint" = "latest"
 "github:kjanat/runner" = "0.28.0"
-bun = "1.4.4"
+bun = "1.4.5"
 
 [settings]
 experimental = true
